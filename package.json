@@ -17,15 +17,18 @@
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "eslint": "5.12.0",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-config-react-app": "^3.0.7",
     "eslint-loader": "2.1.1",
     "eslint-plugin-flowtype": "2.50.1",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "7.12.4",
     "file-loader": "2.0.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.1",
+    "history": "^4.7.2",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
@@ -39,10 +42,12 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.5.0",
     "postcss-safe-parser": "4.0.1",
+    "prettier": "^1.16.4",
     "react": "^16.8.1",
     "react-app-polyfill": "^0.2.1",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux-starter-kit": "^0.4.3",
     "resolve": "1.10.0",
@@ -59,7 +64,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "lint": "node_modules/.bin/eslint src"
   },
   "eslintConfig": {
     "extends": "react-app"
