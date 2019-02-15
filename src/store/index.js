@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from 'redux-starter-kit';
 
-import initReducer from './reducers';
+import initReducer from './reducers.js';
 
 const reducer = {
   init: initReducer
