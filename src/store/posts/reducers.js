@@ -5,7 +5,7 @@ import * as actions from './actions';
 const initial_state = {
   isLoading: true,
   isError: false,
-  posts: []
+  data: []
 };
 
 const postsReducer = createReducer(initial_state, {
@@ -22,7 +22,7 @@ const postsReducer = createReducer(initial_state, {
       ...state,
       isLoading: false,
       isError: false,
-      posts
+      data: posts
     };
   },
 
