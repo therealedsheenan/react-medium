@@ -1,10 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import { Switch, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import NotFound from './components/NotFound';
+import Home from './pages/Home/';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return <div className="App">hello world</div>;
-  }
-}
+import 'semantic-ui-css/semantic.min.css';
+
+const App = () => (
+  <main className="App">
+    <Navigation />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route component={NotFound} />
+    </Switch>
+  </main>
+);
 
 export default App;
