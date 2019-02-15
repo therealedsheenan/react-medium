@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosApi = axios.create({
-  baseUrl: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000',
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json'
@@ -9,14 +9,23 @@ const axiosApi = axios.create({
   withCredentials: true
 });
 
-const api = query => {
-  get: axiosApi
-    .get(query)
-    .then(res => {
-      return res;
-    })
-    .catch(e => e)
-    .then(res => res);
+const requests = {
+  get: query =>
+    axiosApi
+      .get(query)
+      .then(res => ({
+        status: res.status,
+        data: res.data
+      }))
+      .catch(error => ({
+        error: error.message
+      }))
 };
 
-export default api;
+const posts = {
+  get: query => requests.get(query)
+};
+
+export default {
+  posts
+};
