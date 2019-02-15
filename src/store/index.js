@@ -1,9 +1,9 @@
 import { configureStore, getDefaultMiddleware } from 'redux-starter-kit';
 
-import initReducer from './reducers.js';
+import postsReducer from './posts/reducers';
 
 const reducer = {
-  init: initReducer
+  posts: postsReducer
 };
 
 const middleware = [...getDefaultMiddleware()];
