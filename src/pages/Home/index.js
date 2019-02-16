@@ -1,36 +1,23 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Card, Container } from 'semantic-ui-react';
-import { bindActionCreators } from 'redux';
+import { Container } from 'semantic-ui-react';
 
 import Loading from '../../components/Loading';
+import PostList from '../../components/PostList';
 import actions from '../../store/posts/actions';
 
 const Home = props => {
   useEffect(() => {
     props.loadPosts();
-  }, props.posts.isLoading);
+  }, props.postsList.isLoading);
 
   return (
-    <Container>
-      {props.posts.isLoading ? (
+    <Container style={{ marginTop: '7em' }}>
+      {props.postsList.isLoading ? (
         <Loading />
       ) : (
-        <Card.Group itemsPerRow={6}>
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-          <Card raised image={'https://source.unsplash.com/random'} />
-        </Card.Group>
+        <PostList posts={props.postsList.data} />
       )}
     </Container>
   );
@@ -38,18 +25,18 @@ const Home = props => {
 
 Home.propTypes = {
   loadPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object
+  postsList: PropTypes.object
 };
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ postsList }) => {
   return {
-    posts
+    postsList
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPosts: bindActionCreators(actions.loadPosts, dispatch)
+    loadPosts: () => dispatch(actions.loadPostsLists)
   };
 };
 
