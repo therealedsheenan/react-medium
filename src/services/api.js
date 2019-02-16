@@ -19,13 +19,17 @@ const requests = {
       }))
       .catch(error => ({
         error: error.message
+      })),
+  post: (query, body) =>
+    axiosApi
+      .post(query, body)
+      .then(res => ({
+        status: res.status,
+        data: res.data
+      }))
+      .catch(error => ({
+        error: error.message
       }))
 };
 
-const posts = {
-  get: query => requests.get(query)
-};
-
-export default {
-  posts
-};
+export default requests;
