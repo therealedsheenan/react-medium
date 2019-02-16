@@ -1,9 +1,12 @@
 import { configureStore, getDefaultMiddleware } from 'redux-starter-kit';
 
-import postsReducer from './posts/reducers';
+import postReducers from './posts/reducers';
+import commentReducers from './comments/reducers';
 
 const reducer = {
-  posts: postsReducer
+  postsList: postReducers.postsListReducer,
+  postItem: postReducers.postItemReducer,
+  commentsList: commentReducers.commentsListReducer
 };
 
 const middleware = [...getDefaultMiddleware()];

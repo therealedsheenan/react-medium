@@ -3,32 +3,32 @@ import { createAction } from 'redux-starter-kit';
 import api from '../../services/api';
 
 // GET ALL POSTS
-export const getPostsRequest = createAction('post/getAllPosts/request');
-export const getPostsSuccess = createAction('post/getAllPosts/success');
-export const getPostsFailure = createAction('post/getAllPosts/failure');
+export const getPostsListRequest = createAction('post/postsList/request');
+export const getPostsListSuccess = createAction('post/postsList/success');
+export const getPostsListFailure = createAction('post/postsList/failure');
 
 // // GET SINGLE POST
-export const getPostRequest = createAction('post/getPost/request');
-export const getPostSuccess = createAction('post/getPost/success');
-export const getPostFailure = createAction('post/getPost/failure');
+export const getPostItemRequest = createAction('post/postItem/request');
+export const getPostItemSuccess = createAction('post/postItem/success');
+export const getPostItemFailure = createAction('post/postItem/failure');
 
 const actions = {
-  loadPosts: () => async dispatch => {
+  loadPostsLists: async dispatch => {
     try {
-      dispatch(getPostsRequest());
-      const posts = await api.posts.get('/posts');
-      dispatch(getPostsSuccess(posts));
+      dispatch(getPostsListRequest());
+      const response = await api.posts.get('/posts');
+      dispatch(getPostsListSuccess(response.data.posts));
     } catch (e) {
-      dispatch(getPostsFailure(e));
+      dispatch(getPostsListFailure(e));
     }
   },
-  loadPost: postId => async dispatch => {
+  loadPostItem: postId => async dispatch => {
     try {
-      dispatch(getPostRequest(postId));
-      const post = await api.posts.get(`/post/${postId}`);
-      dispatch(getPostSuccess(post));
+      dispatch(getPostItemRequest(postId));
+      const response = await api.posts.get(`/post/${postId}`);
+      dispatch(getPostItemSuccess(response.data.post));
     } catch (e) {
-      dispatch(getPostFailure(e));
+      dispatch(getPostItemFailure(e));
     }
   }
 };

@@ -2,22 +2,31 @@ import { createReducer } from 'redux-starter-kit';
 
 import * as actions from './actions';
 
-const initial_state = {
+// Post list initial state
+const postsListInitialState = {
   isLoading: true,
   isError: false,
   data: []
 };
 
-const postsReducer = createReducer(initial_state, {
-  [actions.getPostsRequest]: (state, action) => {
+// Post item initial state
+const postItemInitialState = {
+  isLoading: true,
+  isError: false,
+  data: {}
+};
+
+// Post list reducer
+const postsListReducer = createReducer(postsListInitialState, {
+  [actions.getPostsListRequest]: state => {
     return {
       ...state,
       isLoading: true
     };
   },
 
-  [actions.getPostsSuccess]: (state, action) => {
-    const posts = action.payload.data;
+  [actions.getPostsListSuccess]: (state, action) => {
+    const posts = action.payload;
     return {
       ...state,
       isLoading: false,
@@ -26,7 +35,7 @@ const postsReducer = createReducer(initial_state, {
     };
   },
 
-  [actions.getPostsFailure]: (state, action) => {
+  [actions.getPostsListFailure]: state => {
     return {
       ...state,
       isLoading: false,
@@ -35,4 +44,35 @@ const postsReducer = createReducer(initial_state, {
   }
 });
 
-export default postsReducer;
+// Post item reducer
+const postItemReducer = createReducer(postItemInitialState, {
+  [actions.getPostItemRequest]: state => {
+    return {
+      ...state,
+      isLoading: true
+    };
+  },
+
+  [actions.getPostItemSuccess]: (state, action) => {
+    const post = action.payload;
+    return {
+      ...state,
+      isLoading: false,
+      isError: false,
+      data: post
+    };
+  },
+
+  [actions.getPostItemFailure]: state => {
+    return {
+      ...state,
+      isLoading: false,
+      isError: true
+    };
+  }
+});
+
+export default {
+  postsListReducer,
+  postItemReducer
+};
