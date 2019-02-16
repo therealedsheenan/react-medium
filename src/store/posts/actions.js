@@ -16,7 +16,7 @@ const actions = {
   loadPostsLists: async dispatch => {
     try {
       dispatch(getPostsListRequest());
-      const response = await api.posts.get('/posts');
+      const response = await api.get('/posts');
       dispatch(getPostsListSuccess(response.data.posts));
     } catch (e) {
       dispatch(getPostsListFailure(e));
@@ -25,7 +25,7 @@ const actions = {
   loadPostItem: postId => async dispatch => {
     try {
       dispatch(getPostItemRequest(postId));
-      const response = await api.posts.get(`/post/${postId}`);
+      const response = await api.get(`/post/${postId}`);
       dispatch(getPostItemSuccess(response.data.post));
     } catch (e) {
       dispatch(getPostItemFailure(e));
