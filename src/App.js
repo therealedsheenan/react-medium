@@ -6,6 +6,7 @@ import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Home from './pages/Home/';
 import Post from './pages/Post/';
+import Login from './pages/Auth/login';
 import './App.css';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -16,6 +17,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/post/:postId" component={Post} />
+      <Route path="/user/login" component={Login} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
