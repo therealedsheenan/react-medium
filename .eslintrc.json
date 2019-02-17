@@ -4,7 +4,8 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
@@ -15,7 +16,11 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "no-unused-vars": "error",
     "no-underscore-dangle": "off",
@@ -49,5 +54,12 @@
         "extensions": [".js", ".jsx"]
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    }
   }
 }
