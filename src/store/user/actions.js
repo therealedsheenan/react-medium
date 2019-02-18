@@ -39,11 +39,20 @@ const actions = {
     }
   },
   // @param body - post request body
-  registerUser: body => async dispatch => {
+  registerUser: (payload, setErrors, history) => async dispatch => {
     try {
-      dispatch(registerUserRequest());
-      const response = await api.post('/user/new', body);
-      dispatch(registerUserSuccess(response.data.user));
+      dispatch(registerUserRequest(payload));
+      const { status, error, data } = await api.post('/user/new', payload);
+      if (status === 200 && !error) {
+        dispatch(registerUserSuccess(data.user));
+        auth.setToken(data.user.token);
+        // redirect user to home page
+        history.push('/');
+      } else {
+        setErrors({
+          register: 'Invalid credentials.'
+        });
+      }
     } catch (e) {
       dispatch(registerUserFailure(e));
     }
