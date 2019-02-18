@@ -11,7 +11,7 @@ import userActions from '../store/user/actions';
 const Navigation = ({ logoutUser, user }) => {
   useEffect(() => {
     auth.isAuthenticated();
-  }, user.isLoading);
+  }, [user.isLoading]);
   return (
     <Menu fixed="top" inverted>
       <Container>

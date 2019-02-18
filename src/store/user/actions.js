@@ -20,15 +20,17 @@ export const registerUserFailure = createAction('user/register/failure');
 
 const actions = {
   // @param body - post request body
-  loginUser: (payload, setErrors, history) => async dispatch => {
+  loginUser: (payload, setErrors, history, setSubmitting) => async dispatch => {
+    setSubmitting(false);
     try {
       dispatch(loginUserRequest(payload));
       const { status, error, data } = await api.post('/user/login', payload);
       if (status === 200 && !error) {
         dispatch(loginUserSuccess(data.user));
-        auth.setToken(data.user.token);
+        (async () => {
+          auth.setToken(data.user.token);
+        })().then(() => history.replace('/'));
         // redirect user to home page
-        history.push('/');
       } else {
         setErrors({
           login: 'Invalid credentials.'

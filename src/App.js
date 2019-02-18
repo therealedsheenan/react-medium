@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { Switch, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import { Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Home from './pages/Home/';
@@ -14,12 +12,11 @@ import 'semantic-ui-css/semantic.min.css';
 
 const App = () => (
   <main className="App">
-    <Navigation />
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/post/:postId" component={Post} />
-      <Route path="/user/login" component={Login} />
-      <Route path="/user/new" component={Register} />
+      <Route exact path="/post/:postId" component={Post} />
+      <Route exact path="/user/login" component={Login} />
+      <Route exact path="/user/new" component={Register} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
