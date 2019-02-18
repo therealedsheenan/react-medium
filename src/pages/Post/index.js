@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
 import Loading from '../../components/Loading';
+import Navigation from '../../components/Navigation';
 import PostItem from '../../components/PostItem';
 import CommentsList from '../../components/CommentsList';
 import postActions from '../../store/posts/actions';
@@ -15,16 +16,19 @@ const Post = props => {
     props.loadCommentsLists();
   }, props.postItem.isLoading);
   return (
-    <Container style={{ marginTop: '7em' }}>
-      {props.postItem.isLoading || props.commentsList.isLoading ? (
-        <Loading />
-      ) : (
-        <Fragment>
-          <PostItem post={props.postItem.data} />
-          <CommentsList comments={props.commentsList.data} />
-        </Fragment>
-      )}
-    </Container>
+    <Fragment>
+      <Navigation />
+      <Container style={{ marginTop: '7em' }}>
+        {props.postItem.isLoading || props.commentsList.isLoading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            <PostItem post={props.postItem.data} />
+            <CommentsList comments={props.commentsList.data} />
+          </Fragment>
+        )}
+      </Container>
+    </Fragment>
   );
 };
 

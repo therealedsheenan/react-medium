@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
 import Loading from '../../components/Loading';
+import Navigation from '../../components/Navigation';
 import PostList from '../../components/PostList';
 import actions from '../../store/posts/actions';
 
@@ -13,13 +14,16 @@ const Home = props => {
   }, props.postsList.isLoading);
 
   return (
-    <Container style={{ marginTop: '7em' }}>
-      {props.postsList.isLoading ? (
-        <Loading />
-      ) : (
-        <PostList posts={props.postsList.data} />
-      )}
-    </Container>
+    <Fragment>
+      <Navigation />
+      <Container style={{ marginTop: '7em' }}>
+        {props.postsList.isLoading ? (
+          <Loading />
+        ) : (
+          <PostList posts={props.postsList.data} />
+        )}
+      </Container>
+    </Fragment>
   );
 };
 
