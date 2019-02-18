@@ -1,6 +1,7 @@
 import { createReducer } from 'redux-starter-kit';
 
 import * as actions from './actions';
+import * as helpers from '../reducer-helpers';
 
 // User initial state
 const userInitialState = {
@@ -11,80 +12,20 @@ const userInitialState = {
 
 // User reducer
 const userReducer = createReducer(userInitialState, {
-  [actions.loginUserRequest]: state => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+  [actions.loginUserRequest]: state => helpers.loadingObject(state),
 
-  [actions.loginUserSuccess]: (state, action) => {
-    const user = action.payload;
-    return {
-      ...state,
-      isLoading: false,
-      isError: false,
-      data: user
-    };
-  },
+  [actions.loginUserSuccess]: (state, action) =>
+    helpers.successObject(state, action.payload),
 
-  [actions.loginUserFailure]: state => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: true
-    };
-  },
+  [actions.loginUserFailure]: state => helpers.errorObject(state),
+  [actions.logoutUserRequest]: state => helpers.loadingObject(state),
 
-  [actions.logoutUserRequest]: state => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+  [actions.logoutUserSuccess]: () => userInitialState,
 
-  [actions.logoutUserSuccess]: (state, action) => {
-    const user = action.payload;
-    return {
-      ...state,
-      isLoading: false,
-      isError: false,
-      data: user
-    };
-  },
+  [actions.registerUserSuccess]: (state, action) =>
+    helpers.successObject(state, action.payload),
 
-  [actions.logoutUserFailure]: state => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: true
-    };
-  },
-
-  [actions.registerUserRequest]: state => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
-
-  [actions.registerUserSuccess]: (state, action) => {
-    const user = action.payload;
-    return {
-      ...state,
-      isLoading: false,
-      isError: false,
-      data: user
-    };
-  },
-
-  [actions.registerUserFailure]: state => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: true
-    };
-  }
+  [actions.registerUserFailure]: state => helpers.errorObject(state)
 });
 
 export default {

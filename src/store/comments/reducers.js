@@ -1,40 +1,23 @@
 import { createReducer } from 'redux-starter-kit';
 
 import * as actions from './actions';
+import * as helpers from '../reducer-helpers';
 
-// Post list initial state
+// Comments list initial state
 const postsListInitialState = {
   isLoading: true,
   isError: false,
   data: []
 };
 
-// Post list reducer
+// Comments list reducer
 const commentsListReducer = createReducer(postsListInitialState, {
-  [actions.getCommentsListRequest]: state => {
-    return {
-      ...state,
-      isLoading: true
-    };
-  },
+  [actions.getCommentsListRequest]: state => helpers.loadingObject(state),
 
-  [actions.getCommentsListSuccess]: (state, action) => {
-    const comments = action.payload;
-    return {
-      ...state,
-      isLoading: false,
-      isError: false,
-      data: comments
-    };
-  },
+  [actions.getCommentsListSuccess]: (state, action) =>
+    helpers.successObject(state, action.payload),
 
-  [actions.getCommentsListFailure]: state => {
-    return {
-      ...state,
-      isLoading: false,
-      isError: true
-    };
-  }
+  [actions.getCommentsListFailure]: state => helpers.errorObject(state)
 });
 
 export default {
