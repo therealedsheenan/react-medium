@@ -2,6 +2,11 @@ import { createAction } from 'redux-starter-kit';
 
 import api from '../../services/api';
 
+export const postType = {
+  published: 'published',
+  draft: 'draft'
+};
+
 // GET ALL POSTS
 export const getPostsListRequest = createAction('post/postsList/request');
 export const getPostsListSuccess = createAction('post/postsList/success');
@@ -13,10 +18,16 @@ export const getPostItemSuccess = createAction('post/postItem/success');
 export const getPostItemFailure = createAction('post/postItem/failure');
 
 const actions = {
-  loadPostsLists: async dispatch => {
+  /*
+   * @params dispatch - function redux
+   * @params postType - string - drafts | published
+   */
+  loadPostsLists: (type = postType.published) => async dispatch => {
+    console.log(type);
+    const query = type === postType.published ? '/posts' : '/posts/draft';
     try {
       dispatch(getPostsListRequest());
-      const response = await api.get('/posts');
+      const response = await api.get(query);
       dispatch(getPostsListSuccess(response.data.posts));
     } catch (e) {
       dispatch(getPostsListFailure(e));
