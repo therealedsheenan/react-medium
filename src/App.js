@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
-import Post from './pages/Post/';
+import ShowPost from './pages/Post/show';
 import List from './pages/Post/list';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
@@ -25,7 +26,7 @@ const App = () => (
         path="/drafts"
         render={props => <List {...props} postType={postType.draft} />}
       />
-      <Route exact path="/post/:postId" component={Post} />
+      <Route exact path="/post/:postId" component={ShowPost} />
       <Route exact path="/user/login" component={Login} />
       <Route exact path="/user/new" component={Register} />
       <Route component={NotFound} />

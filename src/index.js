@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -9,11 +9,11 @@ import store from './store';
 import history from './history';
 
 ReactDOM.render(
-  <Router history={history}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
       <App />
-    </Provider>
-  </Router>,
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
