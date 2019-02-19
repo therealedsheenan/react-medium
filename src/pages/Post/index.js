@@ -27,7 +27,7 @@ const Post = props => {
   return (
     <Fragment>
       <Navigation />
-      <Container style={{ marginTop: '7em' }}>
+      <Container className="container-main">
         {props.postItem.isLoading || props.commentsList.isLoading ? (
           <Loading />
         ) : (

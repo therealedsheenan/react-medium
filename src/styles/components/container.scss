@@ -1,0 +1,14 @@
+/*
+* Container component
+* Overriding container component from react-semantic
+*/
+
+.container {
+  &-main {
+    margin-top: 7em;
+  }
+
+  &-comment {
+    margin-top: 2rem;
+  }
+}

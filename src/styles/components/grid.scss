@@ -1,0 +1,10 @@
+/*
+* Grid component
+* Overriding grid component from react-semantic
+*/
+
+.grid {
+  &-form {
+    max-width: 450px;
+  }
+}

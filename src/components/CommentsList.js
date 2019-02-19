@@ -3,7 +3,7 @@ import { Button, Comment, Form, Header, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const CommentsList = ({ comments }) => (
-  <Container text style={{ marginTop: '2em' }}>
+  <Container text className="container-comment">
     <Comment.Group>
       <Header as="h3" dividing>
         Comments

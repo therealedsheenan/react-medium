@@ -7,7 +7,7 @@ import { Message } from 'semantic-ui-react';
 import { getFullName } from './Author';
 
 const PostList = ({ posts }) => (
-  <Container style={{ marginTop: '7em' }}>
+  <Container className="container-main">
     <List divided relaxed>
       {posts.length > 0 ? (
         posts.map(post => (

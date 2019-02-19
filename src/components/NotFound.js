@@ -2,7 +2,7 @@ import React from 'react';
 import { Message, Container } from 'semantic-ui-react';
 
 const NotFound = () => (
-  <Container style={{ marginTop: '7em' }}>
+  <Container className="container-main">
     <Message align="center">
       <Message.Header>404 Error</Message.Header>
       <p>Page not found.</p>

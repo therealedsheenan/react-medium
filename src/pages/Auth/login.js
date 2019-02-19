@@ -20,13 +20,9 @@ import userActions from '../../store/user/actions';
 const Login = ({ loginUser }) => (
   <Fragment>
     <Navigation />
-    <Container style={{ marginTop: '7em' }}>
-      <Grid
-        textAlign="center"
-        style={{ height: '100%' }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
+    <Container className="container-main">
+      <Grid textAlign="center" verticalAlign="middle">
+        <Grid.Column className="grid-form">
           <Header as="h2" textAlign="center">
             Log-in to your account
           </Header>
