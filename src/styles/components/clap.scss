@@ -1,0 +1,14 @@
+/*
+* Clap component
+* directory: <root_dir>/src/components/Clap.js
+*/
+
+.clap {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(34,36,38,.15);
+  border-bottom: 1px solid rgba(34,36,38,.15);
+}
+
+.clap:hover {
+  cursor: pointer;
+}

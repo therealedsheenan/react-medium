@@ -6,9 +6,10 @@ import Home from './pages/Home/';
 import Post from './pages/Post/';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
-import './assets/styles.css';
 
+// Styles
 import 'semantic-ui-css/semantic.min.css';
+import './styles/main.scss';
 
 const App = () => (
   <main className="App">
