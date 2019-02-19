@@ -4,6 +4,7 @@ import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Home from './pages/Home/';
 import Post from './pages/Post/';
+import Drafts from './pages/Post/drafts';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
 
@@ -15,6 +16,7 @@ const App = () => (
   <main className="App">
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/post/drafts" component={Drafts} />
       <Route exact path="/post/:postId" component={Post} />
       <Route exact path="/user/login" component={Login} />
       <Route exact path="/user/new" component={Register} />
