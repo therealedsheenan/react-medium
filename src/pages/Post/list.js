@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 
 import Navigation from '../../components/Navigation';
 import PostList from '../../components/PostList';
+import Loading from '../../components/Loading';
+
 import actions from '../../store/posts/actions';
 
-import { postType } from '../../store/posts/actions';
-import Loading from '../Home';
-
-const Drafts = props => {
+const List = props => {
   useEffect(() => {
-    props.loadPosts(postType.draft);
-  }, [false]);
+    props.loadPosts(props.postType);
+  }, [props.postType]);
 
   const { postsList } = props;
   return (
@@ -30,9 +29,10 @@ const Drafts = props => {
   );
 };
 
-Drafts.propTypes = {
+List.propTypes = {
   loadPosts: PropTypes.func.isRequired,
-  postsList: PropTypes.object
+  postsList: PropTypes.object,
+  postType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = ({ postsList }) => {
@@ -50,4 +50,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Drafts);
+)(List);

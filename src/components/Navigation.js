@@ -30,7 +30,7 @@ const Navigation = ({ logoutUser, user }) => {
         ) : (
           <Fragment>
             <Menu.Item active={false}>
-              <Link to="/post/drafts">Draft</Link>
+              <Link to="/drafts">Draft</Link>
             </Menu.Item>
             <Menu.Item active={false} position="right">
               <Button inverted onClick={logoutUser}>
