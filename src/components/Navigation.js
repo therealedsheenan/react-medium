@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Container, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -28,11 +28,16 @@ const Navigation = ({ logoutUser, user }) => {
             </Button>
           </Menu.Item>
         ) : (
-          <Menu.Item active={false} position="right">
-            <Button inverted onClick={logoutUser}>
-              Logout
-            </Button>
-          </Menu.Item>
+          <Fragment>
+            <Menu.Item active={false}>
+              <Link to="/post/drafts">Draft</Link>
+            </Menu.Item>
+            <Menu.Item active={false} position="right">
+              <Button inverted onClick={logoutUser}>
+                Logout
+              </Button>
+            </Menu.Item>
+          </Fragment>
         )}
       </Container>
     </Menu>
