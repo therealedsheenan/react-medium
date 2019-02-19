@@ -1,4 +1,5 @@
 import { createAction } from 'redux-starter-kit';
+import { push } from 'connected-react-router';
 
 import api from '../../services/api';
 import auth from '../../services/authentication';
@@ -20,7 +21,7 @@ export const registerUserFailure = createAction('user/register/failure');
 
 const actions = {
   // @param body - post request body
-  loginUser: (payload, setErrors, history, setSubmitting) => async dispatch => {
+  loginUser: (payload, setErrors, setSubmitting) => async dispatch => {
     setSubmitting(false);
     try {
       dispatch(loginUserRequest(payload));
@@ -30,7 +31,7 @@ const actions = {
         // store to localstorage
         auth.signIn(data.user);
         // redirect user to home page
-        history.replace('/');
+        dispatch(push('/'));
       } else {
         setErrors({
           login: 'Invalid credentials.'
@@ -41,7 +42,8 @@ const actions = {
     }
   },
   // @param body - post request body
-  registerUser: (payload, setErrors, history) => async dispatch => {
+  registerUser: (payload, setErrors, setSubmitting) => async dispatch => {
+    setSubmitting(false);
     try {
       dispatch(registerUserRequest(payload));
       const { status, error, data } = await api.post('/user/new', payload);
@@ -50,7 +52,7 @@ const actions = {
         // store to localstorage
         auth.signIn(data.user);
         // redirect user to home page
-        history.push('/');
+        dispatch(push('/'));
       } else {
         setErrors({
           register: 'Invalid credentials.'
