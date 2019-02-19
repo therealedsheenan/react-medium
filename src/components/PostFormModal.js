@@ -20,7 +20,9 @@ const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
   return (
     <Fragment>
       {isNew ? (
-        <Button onClick={() => handleModal(!open)}>{titleText} Post</Button>
+        <Button primary onClick={() => handleModal(!open)}>
+          {titleText} Post
+        </Button>
       ) : (
         <Button primary icon onClick={() => handleModal(!open)}>
           <Icon name="pencil alternate" />
