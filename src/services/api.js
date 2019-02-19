@@ -1,10 +1,15 @@
 import axios from 'axios';
 
+import auth from './authentication';
+
+const token = auth.isAuthenticated() ? `Bearer ${auth.isAuthenticated()}` : '';
+
 const axiosApi = axios.create({
   baseURL: 'http://localhost:3000',
   timeout: 1000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    Authorization: token
   },
   withCredentials: true
 });

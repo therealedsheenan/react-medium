@@ -27,10 +27,10 @@ const actions = {
       const { status, error, data } = await api.post('/user/login', payload);
       if (status === 200 && !error) {
         dispatch(loginUserSuccess(data.user));
-        (async () => {
-          auth.setToken(data.user.token);
-        })().then(() => history.replace('/'));
+        // store to localstorage
+        auth.signIn(data.user);
         // redirect user to home page
+        history.replace('/');
       } else {
         setErrors({
           login: 'Invalid credentials.'
@@ -47,7 +47,8 @@ const actions = {
       const { status, error, data } = await api.post('/user/new', payload);
       if (status === 200 && !error) {
         dispatch(registerUserSuccess(data.user));
-        auth.setToken(data.user.token);
+        // store to localstorage
+        auth.signIn(data.user);
         // redirect user to home page
         history.push('/');
       } else {
