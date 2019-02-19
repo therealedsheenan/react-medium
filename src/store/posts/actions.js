@@ -23,11 +23,10 @@ const actions = {
    * @params postType - string - drafts | published
    */
   loadPostsLists: (type = postType.published) => async dispatch => {
-    console.log(type);
-    const query = type === postType.published ? '/posts' : '/posts/draft';
+    const urlQuery = type === postType.published ? '/posts' : '/posts/draft';
     try {
       dispatch(getPostsListRequest());
-      const response = await api.get(query);
+      const response = await api.get(urlQuery);
       dispatch(getPostsListSuccess(response.data.posts));
     } catch (e) {
       dispatch(getPostsListFailure(e));
