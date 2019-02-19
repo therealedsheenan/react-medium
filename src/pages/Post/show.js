@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
 import Navigation from '../../components/Navigation';
@@ -23,6 +24,10 @@ const Post = props => {
   useEffect(() => {
     props.loadPostClaps();
   }, [props.claps.data]);
+
+  if (props.postItem.isError) {
+    return <Redirect to="/not-found" />;
+  }
 
   return (
     <Fragment>

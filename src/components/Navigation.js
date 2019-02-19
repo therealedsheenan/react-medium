@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import history from '../history';
 
+import PostFormModal from './PostFormModal';
 import auth from '../services/authentication';
 import userActions from '../store/user/actions';
 
@@ -31,6 +32,9 @@ const Navigation = ({ logoutUser, user }) => {
           <Fragment>
             <Menu.Item active={false}>
               <Link to="/drafts">Draft</Link>
+            </Menu.Item>
+            <Menu.Item active={false}>
+              <PostFormModal />
             </Menu.Item>
             <Menu.Item active={false} position="right">
               <Button inverted onClick={logoutUser}>

@@ -36,8 +36,7 @@ const Register = ({ registerUser }) => (
                   password
                 }
               };
-              await registerUser(payload, setErrors);
-              setSubmitting(false);
+              await registerUser(payload, setErrors, setSubmitting);
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string()
@@ -101,11 +100,11 @@ const mapStateToProps = ({ user }) => ({
   user
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     // pass formik functions and router history to redux-thunk action creator
-    registerUser: (payload, setErrors) =>
-      dispatch(userActions.registerUser(payload, setErrors, ownProps.history))
+    registerUser: (payload, setErrors, setSubmitting) =>
+      dispatch(userActions.registerUser(payload, setErrors, setSubmitting))
   };
 };
 

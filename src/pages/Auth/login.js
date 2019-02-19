@@ -100,18 +100,11 @@ const mapStateToProps = ({ user }) => ({
   user
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     // pass formik functions and router history to redux-thunk action creator
     loginUser: (payload, setErrors, setSubmitting) =>
-      dispatch(
-        userActions.loginUser(
-          payload,
-          setErrors,
-          ownProps.history,
-          setSubmitting
-        )
-      )
+      dispatch(userActions.loginUser(payload, setErrors, setSubmitting))
   };
 };
 
