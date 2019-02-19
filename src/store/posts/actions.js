@@ -23,6 +23,11 @@ export const createPostItemRequest = createAction('post/createPost/request');
 export const createPostItemSuccess = createAction('post/createPost/success');
 export const createPostItemFailure = createAction('post/createPost/failure');
 
+// UPDATE POST
+export const updatePostItemRequest = createAction('post/updatePost/request');
+export const updatePostItemSuccess = createAction('post/updatePost/success');
+export const updatePostItemFailure = createAction('post/updatePost/failure');
+
 const actions = {
   /*
    * @params dispatch - function redux
@@ -47,7 +52,6 @@ const actions = {
       dispatch(getPostItemFailure(e));
     }
   },
-  // eslint-disable-next-line
   createPostItem: (payload, setErrors, setSubmitting) => async dispatch => {
     setSubmitting(false);
     try {
@@ -58,6 +62,23 @@ const actions = {
       dispatch(push(`/post/${response.data.post.id}`));
     } catch (e) {
       dispatch(createPostItemFailure(e));
+    }
+  },
+  updatePostItem: (
+    postId,
+    payload,
+    setErrors,
+    setSubmitting
+  ) => async dispatch => {
+    setSubmitting(false);
+    try {
+      dispatch(updatePostItemRequest());
+      const response = await api.put(`/post/${postId}`, payload);
+      dispatch(updatePostItemSuccess(response.data.post));
+      // redirect user to new post URL
+      dispatch(actions.loadPostItem(response.data.post.id));
+    } catch (e) {
+      dispatch(updatePostItemFailure(e));
     }
   }
 };

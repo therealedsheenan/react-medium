@@ -5,6 +5,7 @@ import { Container } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
+import PostFormModal from '../../components/PostFormModal';
 import Navigation from '../../components/Navigation';
 import PostItem from '../../components/PostItem';
 import CommentsList from '../../components/CommentsList';
@@ -17,9 +18,12 @@ const Post = props => {
 
   // Effects that relies only on post id
   useEffect(() => {
-    props.loadPostItem();
     props.loadCommentsLists();
   }, [postId]);
+
+  useEffect(() => {
+    props.loadPostItem();
+  }, [Object.keys(props.postItem).length]);
 
   useEffect(() => {
     props.loadPostClaps();
@@ -37,6 +41,9 @@ const Post = props => {
           <Loading />
         ) : (
           <Fragment>
+            <Container text>
+              <PostFormModal isNew={false} post={props.postItem.data} />
+            </Container>
             <PostItem post={props.postItem.data} claps={props.claps.data} />
             <CommentsList comments={props.commentsList.data} />
           </Fragment>

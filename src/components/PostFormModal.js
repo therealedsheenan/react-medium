@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Button, Message, Modal, Form } from 'semantic-ui-react';
+import { Button, Message, Modal, Form, Icon } from 'semantic-ui-react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
@@ -7,17 +7,31 @@ import PropTypes from 'prop-types';
 
 import postActions from '../store/posts/actions';
 
-const PostFormModal = ({ createPostItem }) => {
+const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
   const [open, handleModal] = useState(false);
+
+  const formInitialValues = {
+    title: isNew ? '' : post.title,
+    text: isNew ? '' : post.text
+  };
+
+  const titleText = isNew ? 'New' : 'Update';
 
   return (
     <Fragment>
-      <Button onClick={() => handleModal(!open)}>New Post</Button>
+      {isNew ? (
+        <Button onClick={() => handleModal(!open)}>{titleText} Post</Button>
+      ) : (
+        <Button primary icon onClick={() => handleModal(!open)}>
+          <Icon name="pencil alternate" />
+        </Button>
+      )}
+
       <Modal size="small" open={open} onClose={() => handleModal(false)}>
-        <Modal.Header>New Post</Modal.Header>
+        <Modal.Header>{titleText} Post</Modal.Header>
         <Modal.Content>
           <Formik
-            initialValues={{ title: '', text: '' }}
+            initialValues={formInitialValues}
             onSubmit={async (values, { setSubmitting, setErrors }) => {
               const { title, text } = values;
               const payload = {
@@ -26,7 +40,16 @@ const PostFormModal = ({ createPostItem }) => {
                   text
                 }
               };
-              await createPostItem(payload, setErrors, setSubmitting);
+              if (isNew) {
+                await createPostItem(payload, setErrors, setSubmitting);
+              } else {
+                await updatePostItem(
+                  post.id,
+                  payload,
+                  setErrors,
+                  setSubmitting
+                );
+              }
             }}
             validationSchema={Yup.object().shape({
               title: Yup.string()
@@ -60,7 +83,7 @@ const PostFormModal = ({ createPostItem }) => {
                     Cancel
                   </Button>
                   <Button positive type="submit">
-                    Create
+                    Submit
                   </Button>
                 </Form>
               </Fragment>
@@ -73,19 +96,25 @@ const PostFormModal = ({ createPostItem }) => {
 };
 
 PostFormModal.propTypes = {
-  createPostItem: PropTypes.func.isRequired
+  createPostItem: PropTypes.func.isRequired,
+  updatePostItem: PropTypes.func.isRequired,
+  isNew: PropTypes.bool.isRequired,
+  post: PropTypes.object
 };
 
 const mapStateToProps = ({ user }) => ({
   user
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log(ownProps);
+const mapDispatchToProps = dispatch => {
   return {
     // pass formik functions and router history to redux-thunk action creator
     createPostItem: (payload, setErrors, setSubmitting) =>
-      dispatch(postActions.createPostItem(payload, setErrors, setSubmitting))
+      dispatch(postActions.createPostItem(payload, setErrors, setSubmitting)),
+    updatePostItem: (postId, payload, setErrors, setSubmitting) =>
+      dispatch(
+        postActions.updatePostItem(postId, payload, setErrors, setSubmitting)
+      )
   };
 };
 

@@ -34,6 +34,16 @@ const requests = {
       }))
       .catch(error => ({
         error: error.message
+      })),
+  put: (query, body) =>
+    axiosApi
+      .put(query, body)
+      .then(res => ({
+        status: res.status,
+        data: res.data
+      }))
+      .catch(error => ({
+        error: error.message
       }))
 };
 

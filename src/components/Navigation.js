@@ -34,7 +34,7 @@ const Navigation = ({ logoutUser, user }) => {
               <Link to="/drafts">Draft</Link>
             </Menu.Item>
             <Menu.Item active={false}>
-              <PostFormModal />
+              <PostFormModal isNew />
             </Menu.Item>
             <Menu.Item active={false} position="right">
               <Button inverted onClick={logoutUser}>
