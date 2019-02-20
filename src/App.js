@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import ShowPost from './pages/Post/show';
-import List from './pages/Post/list';
+import List from './pages/Post/';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
 import { postType } from './store/posts/actions';

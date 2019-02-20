@@ -8,7 +8,7 @@ import Loading from '../../components/Loading';
 
 import actions from '../../store/posts/actions';
 
-const List = props => {
+const Index = props => {
   useEffect(() => {
     props.loadPosts(props.postType);
   }, [props.postType]);
@@ -18,7 +18,6 @@ const List = props => {
     <Fragment>
       <Navigation />
       <Fragment>
-        <Navigation />
         {postsList.isLoading ? (
           <Loading />
         ) : (
@@ -29,7 +28,7 @@ const List = props => {
   );
 };
 
-List.propTypes = {
+Index.propTypes = {
   loadPosts: PropTypes.func.isRequired,
   postsList: PropTypes.object,
   postType: PropTypes.string.isRequired
@@ -50,4 +49,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(List);
+)(Index);

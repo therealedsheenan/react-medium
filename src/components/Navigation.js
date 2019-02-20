@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { Menu, Container, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import history from '../history';
 
+import history from '../history';
 import PostFormModal from './PostFormModal';
 import auth from '../services/authentication';
 import userActions from '../store/user/actions';
+import mediumLogo from '../assets/medium.png';
 
 const Navigation = ({ logoutUser, user }) => {
   useEffect(() => {
@@ -16,9 +17,9 @@ const Navigation = ({ logoutUser, user }) => {
   return (
     <Menu fixed="top" inverted>
       <Container>
-        <Menu.Item active={false}>
+        <Menu.Item active={false} className="menu-logo">
           <Link to="/">
-            <strong>React Medium</strong>
+            <img src={mediumLogo} alt="medium-logo" />
           </Link>
         </Menu.Item>
         {!auth.isAuthenticated() ? (
