@@ -19,6 +19,17 @@ export const postCommentRequest = createAction('comment/postComment/request');
 export const postCommentSuccess = createAction('comment/postComment/success');
 export const postCommentFailure = createAction('comment/postComment/failure');
 
+// UPDATE COMMENT
+export const updateCommentRequest = createAction(
+  'comment/updateComment/request'
+);
+export const updateCommentSuccess = createAction(
+  'comment/updateComment/success'
+);
+export const updateCommentFailure = createAction(
+  'comment/updateComment/failure'
+);
+
 const actions = {
   loadCommentsLists: postId => async dispatch => {
     try {
@@ -39,6 +50,17 @@ const actions = {
       dispatch(push(`/post/${postId}`));
     } catch (e) {
       dispatch(postCommentFailure(e));
+    }
+  },
+  updateComment: (postId, commentId, payload) => async dispatch => {
+    try {
+      dispatch(updateCommentRequest(payload));
+      const response = await api.put(`/comment/${commentId}/approve`, payload);
+      dispatch(updateCommentSuccess(response.data.comments));
+      // reload page
+      dispatch(actions.loadCommentsLists(postId));
+    } catch (e) {
+      dispatch(updateCommentFailure(e));
     }
   }
 };

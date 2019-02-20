@@ -2,7 +2,9 @@ import React from 'react';
 import { Comment, Header, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const CommentsList = ({ comments }) => (
+import CommentAction from './CommentAction';
+
+const CommentsList = ({ comments, isAuthor }) => (
   <Container text className="container-comment">
     <Comment.Group>
       <Header as="h3" dividing>
@@ -18,6 +20,7 @@ const CommentsList = ({ comments }) => (
               <div>{comment.createDate}</div>
             </Comment.Metadata>
             <Comment.Text>{comment.text}</Comment.Text>
+            {isAuthor && <CommentAction comment={comment} />}
           </Comment.Content>
         </Comment>
       ))}
@@ -26,7 +29,8 @@ const CommentsList = ({ comments }) => (
 );
 
 CommentsList.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.object)
+  comments: PropTypes.arrayOf(PropTypes.object),
+  isAuthor: PropTypes.bool.isRequired
 };
 
 export default CommentsList;

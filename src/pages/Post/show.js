@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
-import Loading from '../../components/Loading';
+import IsLoading from '../../components/IsLoading';
 import PostFormModal from '../../components/PostFormModal';
 import Navigation from '../../components/Navigation';
 import PostItem from '../../components/PostItem';
@@ -48,29 +48,43 @@ const Post = props => {
     <Fragment>
       <Navigation />
       <Container className="container-main">
-        {props.postItem.isLoading || props.commentsList.isLoading ? (
-          <Loading />
-        ) : (
-          <Fragment>
-            {props.postItem.data.isAuthor && (
-              <Container text>
-                <PostFormModal isNew={false} post={props.postItem.data} />
-                {!props.postItem.data.publishedDate ? (
-                  <Button primary onClick={() => publishDraftPost(new Date())}>
-                    Publish post
-                  </Button>
-                ) : (
-                  <Button secondary onClick={() => publishDraftPost()}>
-                    Draft post
-                  </Button>
-                )}
-              </Container>
-            )}
+        <Fragment>
+          {IsLoading(
+            props.postItem.isLoading,
+            () =>
+              props.postItem.data.isAuthor && (
+                <Container text>
+                  <PostFormModal isNew={false} post={props.postItem.data} />
+                  {!props.postItem.data.publishedDate ? (
+                    <Button
+                      primary
+                      onClick={() => publishDraftPost(new Date())}
+                    >
+                      Publish post
+                    </Button>
+                  ) : (
+                    <Button secondary onClick={() => publishDraftPost()}>
+                      Draft post
+                    </Button>
+                  )}
+                </Container>
+              )
+          )}
+          {IsLoading(props.postItem.isLoading, () => (
             <PostItem post={props.postItem.data} claps={props.claps.data} />
-            <CommentsList comments={props.commentsList.data} />
+          ))}
+
+          {IsLoading(props.commentsList.isLoading, () => (
+            <CommentsList
+              isAuthor={props.postItem.data.isAuthor}
+              comments={props.commentsList.data}
+            />
+          ))}
+
+          {IsLoading(props.postItem.isLoading, () => (
             <CommentForm postId={postId} />
-          </Fragment>
-        )}
+          ))}
+        </Fragment>
       </Container>
     </Fragment>
   );
