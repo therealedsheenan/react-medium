@@ -30,6 +30,8 @@ const actions = {
         dispatch(loginUserSuccess(data.user));
         // store to localstorage
         auth.signIn(data.user);
+        // force page reload to persist localstorage data
+        window.location.reload();
         // redirect user to home page
         dispatch(push('/'));
       } else {

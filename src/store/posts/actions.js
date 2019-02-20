@@ -37,8 +37,12 @@ const actions = {
     const urlQuery = type === postType.published ? '/posts' : '/posts/draft';
     try {
       dispatch(getPostsListRequest());
-      const response = await api.get(urlQuery);
-      dispatch(getPostsListSuccess(response.data.posts));
+      const { data, error } = await api.get(urlQuery);
+      if (!error) {
+        dispatch(getPostsListSuccess(data.posts));
+      } else {
+        dispatch(getPostsListFailure(error));
+      }
     } catch (e) {
       dispatch(getPostsListFailure(e));
     }
@@ -52,7 +56,7 @@ const actions = {
       dispatch(getPostItemFailure(e));
     }
   },
-  createPostItem: (payload, setErrors, setSubmitting) => async dispatch => {
+  createPostItem: (payload, setSubmitting) => async dispatch => {
     setSubmitting(false);
     try {
       dispatch(createPostItemRequest());
@@ -67,12 +71,15 @@ const actions = {
   updatePostItem: (
     postId,
     payload,
-    setErrors,
-    setSubmitting
+    setSubmitting = undefined
   ) => async dispatch => {
-    setSubmitting(false);
+    if (setSubmitting) {
+      setSubmitting(false);
+    }
     try {
       dispatch(updatePostItemRequest());
+      console.log(payload);
+      console.log(postId);
       const response = await api.put(`/post/${postId}`, payload);
       dispatch(updatePostItemSuccess(response.data.post));
       // redirect user to new post URL
