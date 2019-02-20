@@ -17,7 +17,9 @@ const Navigation = ({ logoutUser, user }) => {
     <Menu fixed="top" inverted>
       <Container>
         <Menu.Item active={false}>
-          <Link to="/">React Medium</Link>
+          <Link to="/">
+            <strong>React Medium</strong>
+          </Link>
         </Menu.Item>
         {!auth.isAuthenticated() ? (
           <Menu.Item active={false} position="right">

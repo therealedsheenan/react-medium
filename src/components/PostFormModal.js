@@ -34,7 +34,7 @@ const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
         <Modal.Content>
           <Formik
             initialValues={formInitialValues}
-            onSubmit={async (values, { setSubmitting, setErrors }) => {
+            onSubmit={async (values, { setSubmitting }) => {
               const { title, text } = values;
               const payload = {
                 post: {
@@ -43,14 +43,9 @@ const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
                 }
               };
               if (isNew) {
-                await createPostItem(payload, setErrors, setSubmitting);
+                await createPostItem(payload, setSubmitting);
               } else {
-                await updatePostItem(
-                  post.id,
-                  payload,
-                  setErrors,
-                  setSubmitting
-                );
+                await updatePostItem(post.id, payload, setSubmitting);
               }
             }}
             validationSchema={Yup.object().shape({
@@ -111,12 +106,10 @@ const mapStateToProps = ({ user }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     // pass formik functions and router history to redux-thunk action creator
-    createPostItem: (payload, setErrors, setSubmitting) =>
-      dispatch(postActions.createPostItem(payload, setErrors, setSubmitting)),
+    createPostItem: (payload, setSubmitting) =>
+      dispatch(postActions.createPostItem(payload, setSubmitting)),
     updatePostItem: (postId, payload, setErrors, setSubmitting) =>
-      dispatch(
-        postActions.updatePostItem(postId, payload, setErrors, setSubmitting)
-      )
+      dispatch(postActions.updatePostItem(postId, payload, setSubmitting))
   };
 };
 

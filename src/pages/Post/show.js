@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container } from 'semantic-ui-react';
+import { Container, Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 import Loading from '../../components/Loading';
@@ -29,6 +29,15 @@ const Post = props => {
     props.loadPostClaps();
   }, [props.claps.data]);
 
+  // publish or draft a post
+  const publishDraftPost = date => {
+    props.updatePostItem({
+      post: {
+        publishedDate: date ? date : null
+      }
+    });
+  };
+
   if (props.postItem.isError) {
     return <Redirect to="/not-found" />;
   }
@@ -41,9 +50,20 @@ const Post = props => {
           <Loading />
         ) : (
           <Fragment>
-            <Container text>
-              <PostFormModal isNew={false} post={props.postItem.data} />
-            </Container>
+            {props.postItem.data.isAuthor && (
+              <Container text>
+                <PostFormModal isNew={false} post={props.postItem.data} />
+                {!props.postItem.data.publishedDate ? (
+                  <Button primary onClick={() => publishDraftPost(new Date())}>
+                    Publish post
+                  </Button>
+                ) : (
+                  <Button secondary onClick={() => publishDraftPost()}>
+                    Draft post
+                  </Button>
+                )}
+              </Container>
+            )}
             <PostItem post={props.postItem.data} claps={props.claps.data} />
             <CommentsList comments={props.commentsList.data} />
           </Fragment>
@@ -62,6 +82,7 @@ Post.defaultProps = {
 Post.propTypes = {
   match: PropTypes.object,
   claps: PropTypes.object,
+  updatePostItem: PropTypes.func.isRequired,
   loadPostItem: PropTypes.func.isRequired,
   loadCommentsLists: PropTypes.func.isRequired,
   loadPostClaps: PropTypes.func.isRequired,
@@ -83,6 +104,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   } = ownProps;
   return {
     loadPostItem: () => dispatch(postActions.loadPostItem(params.postId)),
+    updatePostItem: payload =>
+      dispatch(postActions.updatePostItem(params.postId, payload)),
     loadCommentsLists: () =>
       dispatch(commentActions.loadCommentsLists(params.postId)),
     loadPostClaps: () => dispatch(clapsActions.loadPostClaps(params.postId))
