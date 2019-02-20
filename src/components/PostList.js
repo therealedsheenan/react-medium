@@ -8,7 +8,9 @@ import { getFullName } from './Author';
 
 const PostList = ({ posts }) => {
   const postsStatusHeader = () => {
-    return posts[0].publishedDate ? 'Published posts' : 'Draft posts';
+    return posts.length > 0 && posts[0].publishedDate
+      ? 'Published posts'
+      : 'Draft posts';
   };
 
   return (

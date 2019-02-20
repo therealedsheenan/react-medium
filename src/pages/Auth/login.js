@@ -70,7 +70,7 @@ const Login = ({ loginUser }) => (
                       value={values.password}
                       onChange={handleChange}
                     />
-                    <Button fluid size="large" type="submit">
+                    <Button primary fluid size="large" type="submit">
                       Login
                     </Button>
                   </Segment>

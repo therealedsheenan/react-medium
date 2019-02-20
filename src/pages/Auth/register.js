@@ -70,7 +70,7 @@ const Register = ({ registerUser }) => (
                       value={values.password}
                       onChange={handleChange}
                     />
-                    <Button fluid size="large" type="submit">
+                    <Button primary fluid size="large" type="submit">
                       Register
                     </Button>
                   </Segment>
