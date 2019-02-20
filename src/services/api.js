@@ -5,7 +5,7 @@ import auth from './authentication';
 const token = auth.isAuthenticated() ? `Bearer ${auth.isAuthenticated()}` : '';
 
 const axiosApi = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
