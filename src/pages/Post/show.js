@@ -9,6 +9,8 @@ import PostFormModal from '../../components/PostFormModal';
 import Navigation from '../../components/Navigation';
 import PostItem from '../../components/PostItem';
 import CommentsList from '../../components/CommentsList';
+import CommentForm from '../../components/CommentForm';
+
 import postActions from '../../store/posts/actions';
 import commentActions from '../../store/comments/actions';
 import clapsActions from '../../store/claps/actions';
@@ -66,6 +68,7 @@ const Post = props => {
             )}
             <PostItem post={props.postItem.data} claps={props.claps.data} />
             <CommentsList comments={props.commentsList.data} />
+            <CommentForm postId={postId} />
           </Fragment>
         )}
       </Container>

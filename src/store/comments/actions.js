@@ -29,10 +29,11 @@ const actions = {
       dispatch(getCommentsListFailure(e));
     }
   },
-  createComment: (postId, payload) => async dispatch => {
+  createComment: (postId, payload, setSubmitting) => async dispatch => {
+    setSubmitting(false);
     try {
       dispatch(postCommentRequest(payload));
-      const response = await api.post(`/post/${postId}/comment`, payload);
+      const response = await api.post(`/post/${postId}/comment/new`, payload);
       dispatch(postCommentSuccess(response.data.comments));
       // reload page
       dispatch(push(`/post/${postId}`));

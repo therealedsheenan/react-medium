@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Comment, Form, Header, Container } from 'semantic-ui-react';
+import { Comment, Header, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const CommentsList = ({ comments }) => (
@@ -21,15 +21,6 @@ const CommentsList = ({ comments }) => (
           </Comment.Content>
         </Comment>
       ))}
-      <Form reply>
-        <Form.TextArea />
-        <Button
-          content="Add Comment"
-          labelPosition="left"
-          icon="edit"
-          primary
-        />
-      </Form>
     </Comment.Group>
   </Container>
 );
