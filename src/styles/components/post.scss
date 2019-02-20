@@ -1,0 +1,24 @@
+/*
+* Menu component
+* directory:
+*   <root_dir>/src/components/PostItem.js
+*   <root_dir>/src/components/PostList.js
+*   <root_dir>/src/components/PostFormModal.js
+*/
+
+.post {
+  &-list {
+    &-item {}
+
+    &-info {
+
+    }
+
+    &-image {
+      .image {
+        width: auto;
+        height: 200px;
+      }
+    }
+  }
+}

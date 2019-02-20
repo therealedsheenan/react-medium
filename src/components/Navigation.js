@@ -15,7 +15,7 @@ const Navigation = ({ logoutUser, user }) => {
     auth.isAuthenticated();
   }, [user.isLoading]);
   return (
-    <Menu fixed="top" inverted>
+    <Menu fixed="top" borderless>
       <Container>
         <Menu.Item active={false} className="menu-logo">
           <Link to="/">
@@ -24,10 +24,10 @@ const Navigation = ({ logoutUser, user }) => {
         </Menu.Item>
         {!auth.isAuthenticated() ? (
           <Menu.Item active={false} position="right">
-            <Button inverted>
+            <Button>
               <Link to="/user/login">Login </Link>
             </Button>
-            <Button inverted style={{ marginLeft: '0.5em' }}>
+            <Button style={{ marginLeft: '0.5em' }}>
               <Link to="/user/new"> Sign Up</Link>
             </Button>
           </Menu.Item>
@@ -40,9 +40,7 @@ const Navigation = ({ logoutUser, user }) => {
               <PostFormModal isNew />
             </Menu.Item>
             <Menu.Item active={false} position="right">
-              <Button inverted onClick={logoutUser}>
-                Logout
-              </Button>
+              <Button onClick={logoutUser}>Logout</Button>
             </Menu.Item>
           </Fragment>
         )}

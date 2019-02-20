@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import postActions from '../store/posts/actions';
 
-const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
+const CommentForm = ({ createPostItem, isNew, post, updatePostItem }) => {
   const [open, handleModal] = useState(false);
 
   const formInitialValues = {
@@ -79,7 +79,7 @@ const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
                   <Button negative onClick={() => handleModal(false)}>
                     Cancel
                   </Button>
-                  <Button primary type="submit">
+                  <Button positive type="submit">
                     Submit
                   </Button>
                 </Form>
@@ -92,7 +92,7 @@ const PostFormModal = ({ createPostItem, isNew, post, updatePostItem }) => {
   );
 };
 
-PostFormModal.propTypes = {
+CommentForm.propTypes = {
   createPostItem: PropTypes.func.isRequired,
   updatePostItem: PropTypes.func.isRequired,
   isNew: PropTypes.bool.isRequired,
@@ -116,4 +116,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostFormModal);
+)(CommentForm);

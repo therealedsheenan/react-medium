@@ -3,17 +3,17 @@ import { Container, Segment, Grid, Header, Divider } from 'semantic-ui-react';
 
 const Footer = () => (
   <footer className="footer">
-    <Segment inverted vertical>
+    <Divider section />
+    <Segment vertical>
       <Container textAlign="center">
-        <Grid divided stackable inverted>
+        <Grid divided stackable>
           <Grid.Row>
             <Grid.Column>
-              <Header inverted as="h4" content="React-Medium" />
+              <Header as="h4" content="React-Medium" />
               <p>React implementation of Medium clone</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Divider inverted section />
       </Container>
     </Segment>
   </footer>
