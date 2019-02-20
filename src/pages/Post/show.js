@@ -74,12 +74,15 @@ const Post = props => {
             <PostItem post={props.postItem.data} claps={props.claps.data} />
           ))}
 
-          {IsLoading(props.commentsList.isLoading, () => (
-            <CommentsList
-              isAuthor={props.postItem.data.isAuthor}
-              comments={props.commentsList.data}
-            />
-          ))}
+          {IsLoading(
+            props.commentsList.isLoading || props.postItem.isLoading,
+            () => (
+              <CommentsList
+                isAuthor={props.postItem.data && props.postItem.data.isAuthor}
+                comments={props.commentsList.data}
+              />
+            )
+          )}
 
           {IsLoading(props.postItem.isLoading, () => (
             <CommentForm postId={postId} />

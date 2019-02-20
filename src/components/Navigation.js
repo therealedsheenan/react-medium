@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Container, Button } from 'semantic-ui-react';
+import { Menu, Container, Dropdown, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -24,12 +24,10 @@ const Navigation = ({ logoutUser, user }) => {
         </Menu.Item>
         {!auth.isAuthenticated() ? (
           <Menu.Item active={false} position="right">
-            <Button>
-              <Link to="/user/login">Login </Link>
-            </Button>
-            <Button style={{ marginLeft: '0.5em' }}>
-              <Link to="/user/new"> Sign Up</Link>
-            </Button>
+            <Link to="/user/login">Login</Link>
+            <Link style={{ marginLeft: '20px' }} to="/user/new">
+              Sign-up
+            </Link>
           </Menu.Item>
         ) : (
           <Fragment>
@@ -40,7 +38,18 @@ const Navigation = ({ logoutUser, user }) => {
               <PostFormModal isNew />
             </Menu.Item>
             <Menu.Item active={false} position="right">
-              <Button onClick={logoutUser}>Logout</Button>
+              <Dropdown
+                trigger={<Icon name="user circle" size="big" />}
+                pointing="top left"
+                icon={null}
+              >
+                <Dropdown.Menu>
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={logoutUser}>
+                    <span>Logout</span>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Menu.Item>
           </Fragment>
         )}
