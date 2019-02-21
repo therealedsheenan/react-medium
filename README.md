@@ -1,6 +1,8 @@
 # react-medium
 Medium clone built with React + Redux
 
+This is a React implementation of [Node-medium-api](https://github.com/therealedsheenan/node-medium-api)
+
 ## Available Scripts
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
