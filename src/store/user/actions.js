@@ -19,7 +19,54 @@ export const registerUserRequest = createAction('user/register/request');
 export const registerUserSuccess = createAction('user/register/success');
 export const registerUserFailure = createAction('user/register/failure');
 
+// Get user profile action creators
+export const getUserProfileRequest = createAction('userProfile/get/request');
+export const getUserProfileSuccess = createAction('userProfile/get/success');
+export const getUserProfileFailure = createAction('userProfile/get/failure');
+
+// Update user profile action creators
+export const updateUserProfileRequest = createAction(
+  'userProfile/update/request'
+);
+export const updateUserProfileSuccess = createAction(
+  'userProfile/update/success'
+);
+export const updateUserProfileFailure = createAction(
+  'userProfile/update/failure'
+);
+
 const actions = {
+  updateUserProfile: (payload, setErrors, setSubmitting) => async dispatch => {
+    setSubmitting(false);
+    try {
+      dispatch(updateUserProfileRequest(payload));
+      const { error, data } = await api.put('/user/profile', payload);
+      if (!error) {
+        dispatch(updateUserProfileSuccess(data.user));
+        // refresh user profile
+        dispatch(actions.getUserProfile());
+      } else {
+        setErrors({ userProfile: error });
+        dispatch(updateUserProfileFailure(error));
+      }
+    } catch (e) {
+      setErrors({ userProfile: e });
+      dispatch(updateUserProfileFailure(e));
+    }
+  },
+  getUserProfile: () => async dispatch => {
+    try {
+      dispatch(getUserProfileRequest());
+      const { error, data } = await api.get('/user/profile');
+      if (!error) {
+        dispatch(getUserProfileSuccess(data.user));
+      } else {
+        dispatch(getUserProfileFailure(error));
+      }
+    } catch (e) {
+      dispatch(registerUserFailure(e));
+    }
+  },
   // @param body - post request body
   loginUser: (payload, setErrors, setSubmitting) => async dispatch => {
     setSubmitting(false);
@@ -71,7 +118,8 @@ const actions = {
       dispatch(logoutUserRequest());
       auth.signOut();
       dispatch(logoutUserSuccess());
-      // redirect to login page
+      // force page reload to persist localstorage data
+      window.location.reload();
       history.push('/user/login');
     } catch (e) {
       dispatch(logoutUserFailure(e));

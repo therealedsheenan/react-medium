@@ -7,6 +7,7 @@ import ShowPost from './pages/Post/show';
 import List from './pages/Post/';
 import Login from './pages/Auth/login';
 import Register from './pages/Auth/register';
+import UserProfile from './pages/User/profile';
 import { postType } from './store/posts/actions';
 
 // Styles
@@ -28,6 +29,7 @@ const App = () => (
       />
       <Route exact path="/post/:postId" component={ShowPost} />
       <Route exact path="/user/login" component={Login} />
+      <Route exact path="/user/profile" component={UserProfile} />
       <Route exact path="/user/new" component={Register} />
       <Route component={NotFound} />
     </Switch>

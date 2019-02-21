@@ -13,10 +13,15 @@ const userInitialState = {
 // User reducer
 const userReducer = createReducer(userInitialState, {
   [actions.loginUserRequest]: state => helpers.loadingObject(state),
+  [actions.getUserProfileRequest]: state => helpers.loadingObject(state),
 
   [actions.loginUserSuccess]: (state, action) =>
     helpers.successObject(state, action.payload),
 
+  [actions.getUserProfileSuccess]: (state, action) =>
+    helpers.successObject(state, action.payload),
+
+  [actions.getUserProfileFailure]: state => helpers.errorObject(state),
   [actions.loginUserFailure]: state => helpers.errorObject(state),
   [actions.logoutUserRequest]: state => helpers.loadingObject(state),
 

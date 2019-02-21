@@ -44,7 +44,9 @@ const Navigation = ({ logoutUser, user }) => {
                 icon={null}
               >
                 <Dropdown.Menu>
-                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item>
+                    <Link to="/user/profile">Profile</Link>
+                  </Dropdown.Item>
                   <Dropdown.Item onClick={logoutUser}>
                     <span>Logout</span>
                   </Dropdown.Item>
